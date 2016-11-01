@@ -25,6 +25,33 @@ class Type(models.Model):
         return self.name
 
 
+class Service_status(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+class Location(models.Model):
+    name = models.CharField(max_length=50)
+    contact = models.CharField(max_length=100)
+    contact_phone = models.CharField(max_length=20)
+    contact_email = models.EmailField(max_length=254)
+    address = models.CharField(max_length=200)
+    city = models.CharField(max_length=100)
+    zip_code = models.CharField(max_length=20)
+    country = models.CharField(max_length=30)
+    shipping_contact = models.CharField(max_length=100)
+    shipping_contact_phone = models.CharField(max_length=20)
+    shipping_contact_email = models.EmailField(max_length=254)
+    shipping_address = models.CharField(max_length=200)
+    shipping_city = models.CharField(max_length=100)
+    shipping_zip_code = models.CharField(max_length=20)
+    shipping_country = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+
+
 class Integrator(models.Model):
     name = models.CharField(max_length=50)
     email_support = models.EmailField(max_length=254)
@@ -77,6 +104,8 @@ class Device(models.Model):
     management_interface = models.ForeignKey(Management)
     os_version = models.CharField(max_length=20)
     support_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
+    last_backup = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
+
 
     def __str__(self):
         return self.assettag + ' - ' + str(self.vendor) + ' - ' + str(self.product) + ' - ' + self.serial_number + ' - ' + str(self.configuration_owner) + ' - ' + str(self.integrator) + ' - ' + self.management_ipv4 + ' - ' + self.os_version
